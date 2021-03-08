@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from "@apollo/client";
+import ApolloClient from "apollo-boost";
 
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
@@ -15,15 +15,15 @@ import OrderHistory from "./pages/OrderHistory";
 
 const client = new ApolloClient({
   request: (operation) => {
-    const token = localStorage.getItem('id_token')
+    const token = localStorage.getItem("id_token");
     operation.setContext({
       headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    })
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    });
   },
-  uri: '/graphql',
-})
+  uri: "/graphql",
+});
 
 function App() {
   return (
@@ -45,7 +45,6 @@ function App() {
         </div>
       </Router>
     </ApolloProvider>
-
   );
 }
 
